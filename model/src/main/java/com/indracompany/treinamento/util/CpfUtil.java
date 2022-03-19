@@ -6,23 +6,18 @@ public class CpfUtil {
 
 	
 	public static boolean validaCPF(final String cpf) {
-	    if (cpf.equals("00000000000") || cpf.equals("11111111111") || cpf.equals("22222222222") || cpf.equals("33333333333") || cpf.equals("44444444444")
-	        || cpf.equals("55555555555") || cpf.equals("66666666666") || cpf.equals("77777777777") || cpf.equals("88888888888") || cpf.equals("99999999999")
-	        || cpf.length() != 11 || cpf.length() == 14) {
+	    if (CpfUtil.isInvalidCPF(cpf)) {
 	      return false;
 	    }
 	    char dig10;
 	    char dig11;
-	    int sm = 0;
-	    int i = 0;
-	    int r;
-	    int num;
+	    int sm =  0, i = 0 , r = 0 , num = 0;
 	    int peso = 10;
 	    try {
 	      for (; i < 9; i++) {
 	        num = cpf.charAt(i) - 48;
 	        sm = sm + num * peso;
-	        peso = peso - 1;
+	        peso--;
 	      }
 	      r = 11 - sm % 11;
 	      if (r == 10 || r == 11) {
@@ -48,5 +43,13 @@ public class CpfUtil {
 	    } catch (final InputMismatchException erro) {
 	      return false;
 	    }
+	  }
+
+	  private static boolean isInvalidCPF(String cpf) {
+
+		  return cpf.equals("00000000000") || cpf.equals("11111111111") || cpf.equals("22222222222") || cpf.equals("33333333333") || cpf.equals("44444444444")
+				  || cpf.equals("55555555555") || cpf.equals("66666666666") || cpf.equals("77777777777") || cpf.equals("88888888888") || cpf.equals("99999999999")
+				  || cpf.length() != 11 || cpf.length() == 14;
+
 	  }
 }
