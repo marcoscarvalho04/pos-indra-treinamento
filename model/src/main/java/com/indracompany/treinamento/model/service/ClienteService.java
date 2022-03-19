@@ -13,6 +13,7 @@ import com.indracompany.treinamento.model.repository.ClienteRepository;
 import java.util.LinkedList;
 import java.util.List;
 
+
 @Service
 public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRepository>{
 
@@ -24,12 +25,24 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
 
         List<Cliente> cliente = repository.findByCpf(cpf);
 
+        return converterEntidadeParaDTO(cliente);
+    }
+
+    public List<ClienteDTO> buscarClientePorNome(String nome) {
+
+        List<Cliente> clienteList = repository.findByNomeContains(nome);
+        return converterEntidadeParaDTO(clienteList);
+
+    }
+
+
+    public List<ClienteDTO> converterEntidadeParaDTO(List<Cliente> clienteList) {
         List<ClienteDTO> clienteDTOList = new LinkedList<ClienteDTO>();
 
-        if (cliente == null || cliente.isEmpty()) {
+        if (clienteList == null || clienteList.isEmpty()) {
             throw new AplicacaoException(ExceptionValidacoes.ALERTA_NENHUM_REGISTRO_ENCONTRADO);
         }
-        for (Cliente clienteElemento : cliente) {
+        for (Cliente clienteElemento : clienteList) {
 
             clienteDTOList.add(ClienteDTO.builder()
                     .cpf(clienteElemento.getCpf())
@@ -39,7 +52,6 @@ public class ClienteService extends GenericCrudService<Cliente, Long, ClienteRep
                     .build());
 
         }
-
         return clienteDTOList;
     }
 

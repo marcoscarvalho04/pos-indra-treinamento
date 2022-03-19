@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.indracompany.treinamento.model.entity.Cliente;
 import com.indracompany.treinamento.model.service.ClienteService;
 
+import javax.xml.ws.Response;
 import java.util.List;
 
 @RestController
@@ -48,9 +49,27 @@ public class ClienteRest extends GenericCrudRest<Cliente, Long, ClienteService>{
 
 		return new ResponseEntity<List<ClienteDTO>>(clienteDTO, HttpStatus.OK);
 	}
-	
 
+	@GetMapping("/buscarPorNome/{nome}")
+	public ResponseEntity getPorNome(@PathVariable String nome ) {
 
-	
+		List<ClienteDTO> clienteDTO = null;
+		try {
+
+			clienteDTO = clienteService.buscarClientePorNome(nome);
+
+		}catch (AplicacaoException e) {
+
+			if (e.getCustomExceptionValue().getValidacao().getCodigoMsg().equals(ExceptionValidacoes.ALERTA_NENHUM_REGISTRO_ENCONTRADO.getCodigoMsg())) {
+				return new ResponseEntity(HttpStatus.NOT_FOUND);
+			}
+
+		}catch (Exception e ){
+
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		return new ResponseEntity<List<ClienteDTO>>(clienteDTO, HttpStatus.OK);
+	}
 
 }
