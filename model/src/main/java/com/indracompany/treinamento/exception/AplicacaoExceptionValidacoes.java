@@ -1,5 +1,7 @@
 package com.indracompany.treinamento.exception;
 
+import org.springframework.http.ResponseEntity;
+
 /**
  * @author efmendes
  *
@@ -9,6 +11,8 @@ public interface AplicacaoExceptionValidacoes {
   public static final Integer SEVERIDADE_ERRO = 1;
 
   public static final Integer SEVERIDADE_ALERTA = 2;
+
+
 
   /**
    * Código que referência a Mensagem Principal encontrada no arquivo {@link messages.properties}
@@ -46,6 +50,8 @@ public interface AplicacaoExceptionValidacoes {
    * @return int
    */
   public Integer getSeveridade();
+
+  public ResponseEntity responseStatus();
 
 
 

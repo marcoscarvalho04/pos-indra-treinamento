@@ -1,5 +1,7 @@
 package com.indracompany.treinamento.exception;
 
+import org.springframework.http.ResponseEntity;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.LinkedList;
@@ -128,5 +130,11 @@ public class AplicacaoException extends RuntimeException {
   public void setCustomExceptionValues(final List<AplicacaoExceptionValue> customExceptionValues) {
     this.customExceptionValues = customExceptionValues;
   }
+
+  public ResponseEntity retornarStatusHttp(AplicacaoExceptionValue value){
+    return value.getResultHttp();
+  }
+
+
 
 }

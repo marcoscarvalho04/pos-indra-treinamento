@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
@@ -32,7 +33,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @PropertySource(value = "classpath:application.yml")
 @ComponentScan(basePackages = {"io.swagger", "io.swagger.api", "io.swagger.configuration", "com.indracompany.treinamento"})
 @ServletComponentScan
-public class AppConfig {
+public class AppConfig extends SpringBootServletInitializer {
 
   public static void main(final String[] args) {
     SpringApplication.run(AppConfig.class, args);

@@ -1,5 +1,6 @@
 package com.indracompany.treinamento.exception;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
 
 import com.indracompany.treinamento.util.FacesUtil;
@@ -62,6 +63,11 @@ public final class ValidacaoCampos implements AplicacaoExceptionValidacoes {
   @Override
   public Integer getSeveridade() {
     return AplicacaoExceptionValidacoes.SEVERIDADE_ERRO;
+  }
+
+  @Override
+  public ResponseEntity responseStatus() {
+    return this.responseStatus();
   }
 
   public void setCodigoMsg(final String codigoMsg) {

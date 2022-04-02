@@ -6,6 +6,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.indracompany.treinamento.util.FacesUtil;
+import org.springframework.http.ResponseEntity;
+
+import javax.ws.rs.core.Response;
 
 
 /**
@@ -81,6 +84,7 @@ public class AplicacaoExceptionValue {
     return this.validacao;
   }
 
+
   public boolean isCampoView() {
     return this.campoView;
   }
@@ -99,6 +103,10 @@ public class AplicacaoExceptionValue {
 
   public void setValidacao(final AplicacaoExceptionValidacoes validacao) {
     this.validacao = validacao;
+  }
+
+  public ResponseEntity getResultHttp(){
+    return this.validacao.responseStatus();
   }
 
 }

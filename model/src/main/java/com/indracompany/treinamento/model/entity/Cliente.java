@@ -1,22 +1,20 @@
 package com.indracompany.treinamento.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 
+import lombok.*;
 import org.hibernate.validator.constraints.br.CPF;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import java.util.List;
 
 @Entity
 @Table(name = "clientes")
 @Data
 @EqualsAndHashCode(callSuper = true)
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Cliente extends GenericEntity<Long>{
 	
 	@Id
@@ -27,7 +25,7 @@ public class Cliente extends GenericEntity<Long>{
 	private String nome;
 	
 	@CPF
-	@Column(length = 11)
+	@Column(length = 11, unique = true)
 	private String cpf;
 	
 	@Email
@@ -37,5 +35,4 @@ public class Cliente extends GenericEntity<Long>{
 	
 	private String observacoes;
 
-	
 }

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ClienteRepository extends GenericCrudRepository<Cliente, Long>{
 
-    List<Cliente> findByCpf(String cpf);
+    Cliente findByCpf(String cpf);
 
     List<Cliente> findByNomeContains(String nome);
 

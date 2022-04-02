@@ -10,7 +10,7 @@ import javax.faces.validator.ValidatorException;
 import org.springframework.stereotype.Component;
 
 @Component(value = "cnpjValidator")
-@FacesValidator
+@FacesValidator(value = "CnpjValidator")
 public class CnpjValidator implements Validator {
 
   public static final String CNPJ_INVALIDO = "CNPJ: Erro de validação: o valor é inválido.";
@@ -21,16 +21,16 @@ public class CnpjValidator implements Validator {
   }
 
   private static String remove(String CNPJ) {
+
     CNPJ = CNPJ.replace(".", "");
     CNPJ = CNPJ.replace("/", "");
     CNPJ = CNPJ.replace("-", "");
     return CNPJ;
+
   }
 
   private static boolean validaCNPJ(final String CNPJ) {
-    if (CNPJ.equals("00000000000000") || CNPJ.equals("11111111111111") || CNPJ.equals("22222222222222") || CNPJ.equals("33333333333333")
-        || CNPJ.equals("44444444444444") || CNPJ.equals("55555555555555") || CNPJ.equals("66666666666666") || CNPJ.equals("77777777777777")
-        || CNPJ.equals("88888888888888") || CNPJ.equals("99999999999999") || CNPJ.length() != 14) {
+    if (CnpjValidator.isInvalidCNPJ(CNPJ)) {
       return false;
     } else {
       try {
@@ -84,6 +84,13 @@ public class CnpjValidator implements Validator {
       message.setSummary(CnpjValidator.CNPJ_INVALIDO);
       throw new ValidatorException(message);
     }
+  }
+
+  private static boolean isInvalidCNPJ(String CNPJ) {
+
+  return  CNPJ.equals("00000000000000") || CNPJ.equals("11111111111111") || CNPJ.equals("22222222222222") || CNPJ.equals("33333333333333")
+            || CNPJ.equals("44444444444444") || CNPJ.equals("55555555555555") || CNPJ.equals("66666666666666") || CNPJ.equals("77777777777777")
+            || CNPJ.equals("88888888888888") || CNPJ.equals("99999999999999") || CNPJ.length() != 14;
   }
 
 }

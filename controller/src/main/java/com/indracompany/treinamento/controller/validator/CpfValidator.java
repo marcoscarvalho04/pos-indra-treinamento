@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 import com.indracompany.treinamento.util.CpfUtil;
 
 @Component(value = "cpfValidator")
-@FacesValidator
+@FacesValidator(value= "CpfValidator")
 public class CpfValidator implements Validator {
 
   public static final String CPF_INVALIDO = "CPF é inválido.";
